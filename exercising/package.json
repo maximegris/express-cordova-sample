@@ -1,0 +1,26 @@
+{
+    "name": "rest-webserver",
+	"version": "1.0.0",
+    "main": "server.js",
+    "dependencies": {
+        "express": "^4.13.4",
+        "body-parser": "^1.15.0",
+		"tingodb": "^0.4.2"
+    },
+	"devDependencies": {
+		"gulp": "^3.9.1",
+		"gulp-util": "^3.0.7",
+		"map-stream": "^0.0.6",
+		"run-sequence": "^1.1.5",
+		"del": "^2.2.0",
+		"jshint-stylish": "^2.1.0",
+		"gulp-jshint": "^2.0.0",
+		"gulp-sourcemaps": "^1.6.0",
+		"gulp-useref": "^3.0.5",
+		"gulp-requirejs": "^0.1.3",
+		"gulp-watch": "^4.3.5",
+		"browser-sync": "^2.11.1",
+		"gulp-imagemin": "^2.4.0",
+		"gulp-uglify": "^1.5.2"
+  }
+}
