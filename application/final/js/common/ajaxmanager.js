@@ -6,9 +6,8 @@
     mgr.common.AjaxManager = function() {
 
         var self = this;
-        // "http://104.155.45.225:8080/api/";
-        // "http://localhost:8080/api/";
-        self.baseURL = "http://104.155.45.225:8080/api/";
+        // "225.45.155.104";
+        self.baseURL = "http://xxxxxx:8080/api/";
 
         self.ajaxCount = 0;
 

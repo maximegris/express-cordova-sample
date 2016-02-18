@@ -98,7 +98,7 @@
                 return;
             }
 
-            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyB7pWPGH-pS6wEHJQbJ0P3XAUV_-tM30vg&sensor=true');
+            $.getScript('https://maps.googleapis.com/maps/api/js?key=API_KEY&sensor=true');
         }
 
     };
