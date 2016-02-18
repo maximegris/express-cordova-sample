@@ -5,9 +5,6 @@
 
         var self = this;
 
-        self.http = new mgr.common.AjaxManager();
-
-
         $.extend(self, new controllers.CommonController());
 
         self._openFarmerInfo = function() {
@@ -15,6 +12,13 @@
 
             self.changePage('farmers_infos.html', 'fade', "id=" + arrIdx);
         };
+
+        self._deleteFarmer = function() {
+            var arrIdx = this.getAttributeNode("dataIndex").value;
+
+            http.json("farmers/" + id, "DELETE");
+        };
+
 
         self._addNewFarmer = function() {
 
@@ -41,7 +45,7 @@
     controllers.FarmersListController.prototype.load = function() {
         var self = this;
 
-        self.http.json("farmers", "GET")
+        http.json("farmers", "GET")
             .done(function(result) {
                 self.fncDisplayFarmers(result.data);
             });
@@ -56,7 +60,7 @@
 
             for (var i = 0; i < farmers.length; ++i) {
                 farmer = farmers[i];
-                outList += "<li><a class='ui-btn ui-btn-icon-right ui-icon-carat-r' dataIndex='" + farmer._id + "'>";
+                outList += "<li><a class='ui-btn ui-btn-icon-right ui-icon-edit' dataIndex='" + farmer._id + "'>";
                 outList += "<h2>" + farmer.firstname + "</h2>";
                 outList += "<p>" + farmer.age + " </p>";
                 outList += "</li>";
@@ -68,6 +72,8 @@
         $("#farmers-list").html(outList);
 
         this.attachEvents('#farmers-list a', 'click', this._openFarmerInfo);
+
+        this.attachEvents('#farmers-list a', 'swipe', this._deleteFarmer);
 
     };
 

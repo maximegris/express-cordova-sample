@@ -6,8 +6,9 @@
     mgr.common.AjaxManager = function() {
 
         var self = this;
-        // "http://104.155.45.225/api/";
-        self.baseURL = "http://localhost:8080/api/";
+        // "http://104.155.45.225:8080/api/";
+        // "http://localhost:8080/api/";
+        self.baseURL = "http://104.155.45.225:8080/api/";
 
         self.ajaxCount = 0;
 
@@ -46,11 +47,31 @@
                 me.hideIndicator.call(me);
             }
 
+            if (settings.type === "POST") {
+                if (window.cordova) {
+                    window.plugins.toast.show('Données enregistrées', 'long', 'center', function(a) {});
+                } else {
+                    alert('Données enregistrées');
+                }
+            } else if (settings.type === "PUT") {
+                if (window.cordova) {
+                    window.plugins.toast.show('Données mises à jour', 'long', 'center', function(a) {});
+                } else {
+                    alert('Données mises à jour');
+                }
+            } else if (settings.type === "DELETE") {
+                if (window.cordova) {
+                    window.plugins.toast.show('Données supprimées', 'long', 'center', function(a) {});
+                } else {
+                    alert('Données supprimées');
+                }
+            }
+
         });
 
         // gestion des erreurs HTTP
         $(document).ajaxError(function(event, jqxhr, settings, exception) {
-            alert('Une erreur http est survenue : ' + exception);
+            alert('Une erreur http est survenue : ' + exception );
         });
     };
 

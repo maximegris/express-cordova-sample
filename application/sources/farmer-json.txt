@@ -9,7 +9,7 @@
 	farm : {
 		"lat" : ,
 		"lon" : ,
-		"address" : "",
+		"localisation" : "",
 		"postal" : "",
 		"city" : ""
 	},

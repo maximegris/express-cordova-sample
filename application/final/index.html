@@ -12,7 +12,8 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
-
+    <meta http-equiv="Content-Security-Policy"/>
+    
     <!--build:css libs/vendor.min.css-->
     <link rel="stylesheet" href="libs/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="libs/jqm-font-awesome-isvg-ipng.min.css" />
@@ -24,14 +25,6 @@
     <!--endbuild-->
 
     <script type="text/javascript" src="cordova.js"></script>
-
-    <!--build:js libs/vendor.min.js-->
-    <script type="text/javascript" src="libs/jquery-2.1.1.js"></script>
-    <script type="text/javascript" src="libs/jquery.validate.js"></script>   
-    <script type="text/javascript" src="libs/jquery.mobile-1.4.5.js"></script>   
-    <!--endbuild-->
-
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFppelRgqjN7qNo9AKfldJrPIjzo5kyoE&signed_in=true"></script>
     
 </head>
 <body>
@@ -49,46 +42,53 @@
         </header><!-- end of header -->
 
         <footer id="footer" data-role="footer" data-position="fixed" data-fullscreen="true" class="invisible">
-       </footer>
+        </footer>
 
 
-       <div id="loading-indicator"></div>
+        <div id="loading-indicator"></div>
 
-       <!-- this page will be displayed until jqm is initialized and we can load the actual start page -->
-       <section id="Init" data-role="page" data-title="Init">
+        <!-- this page will be displayed until jqm is initialized and we can load the actual start page -->
+        <section id="Init" data-role="page" data-title="Init">
 
-       </section>
+        </section>
 
-       <!-- shared info dialog available on all pages -->
-       <section data-role="page" data-dialog="true" id="ModalInfo" data-title="Information">
-        <div data-role="header">
-            <h1>Information</h1>
-        </div>
+        <!-- shared info dialog available on all pages -->
+        <section data-role="page" data-dialog="true" id="ModalInfo" data-title="Information">
+            <div data-role="header">
+                <h1>Information</h1>
+            </div>
 
-        <div role="main" class="ui-content">
-            <p><b>Application Formation PhoneGap/Cordova</b><br>
-                Application Formation PhoneGap/Cordova.<br>
-                (c) 2016 Maxime GRIS
-            </p>
-            <a data-rel="back" data-role="button">Retour</a>
-        </div>
-    </section>
-</div>
+            <div role="main" class="ui-content">
+                <p><b>Application Formation PhoneGap/Cordova</b><br>
+                    Application Formation PhoneGap/Cordova.<br>
+                    (c) 2016 Maxime GRIS
+                </p>
+                <a data-rel="back" data-role="button">Retour</a>
+            </div>
+        </section>
+    </div>
 
-<!--build:js js/application.min.js-->
-<script type="text/javascript" src="js/common/ajaxmanager.js"></script>
-<script type="text/javascript" src="js/common/router.js"></script>
+        <!--build:js libs/vendor.min.js-->
+    <script type="text/javascript" src="libs/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="libs/jquery.validate.js"></script>   
+    <script type="text/javascript" src="libs/jquery.mobile-1.4.5.js"></script>   
+    <script type="text/javascript" src="libs/fastclick.js"></script> 
+    <!--endbuild-->
 
-<script type="text/javascript" src="js/controllers/common.controller.js"></script>
-<script type="text/javascript" src="js/controllers/init.controller.js"></script>
-<script type="text/javascript" src="js/controllers/home.controller.js"></script>
-<script type="text/javascript" src="js/controllers/farmers.infos.controller.js"></script>
-<script type="text/javascript" src="js/controllers/farmers.list.controller.js"></script>
+    <!--build:js js/application.min.js-->
+    <script type="text/javascript" src="js/common/ajaxmanager.js"></script>
+    <script type="text/javascript" src="js/common/router.js"></script>
 
-<script type="text/javascript" src="js/app.init.js"></script> 
-<script type="text/javascript" src="js/init.js"></script> 
-<!--endbuild-->
+    <script type="text/javascript" src="js/controllers/common.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/init.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/home.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/farmers.infos.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/farmers.list.controller.js"></script>
 
-<script>'use strict'; document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');</script>
+    <script type="text/javascript" src="js/app.init.js"></script> 
+    <script type="text/javascript" src="js/init.js"></script> 
+    <!--endbuild-->
+
+    <script>'use strict'; document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');</script>
 </body>
 </html>

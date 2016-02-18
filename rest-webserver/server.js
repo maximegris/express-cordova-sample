@@ -33,6 +33,7 @@
 		// do logging
 		res.header("Access-Control-Allow-Origin", "*");
 		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+		res.header("Access-Control-Max-Age", "3600");
 		res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, Content-Length, X-Requested-With");
 		console.log('Request on route ' + req.originalUrl);
 		next(); // make sure we o to the next routes and don't stop here

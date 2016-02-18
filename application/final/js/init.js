@@ -1,5 +1,9 @@
-(function() {
+(function(mgr) {
     "use strict";
+
+    // Set des variables globales (google et http)
+    window.google = window.google || {};
+    window.http = window.http || new mgr.common.AjaxManager();
 
     var jqmReady = $.Deferred();
     var pgReady = $.Deferred();
@@ -11,15 +15,22 @@
         isWeb: true,
         // Application Constructor
         initialize: function() {
+            var self = this;
             //This session storage key-value can be set in a web page to separate environments  
             if (!sessionStorage.getItem("isWeb")) {
                 console.log("Is not web.");
-                this.isWeb = false;
-                this.bindEvents();
+                self.isWeb = false;
+                self.bindEvents();
             } else {
                 console.log("Is web.");
+
                 //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
-                pgReady.resolve();
+                // timeout pour simuler deviceready
+                setTimeout(function() {
+                    self.loadMapsApi();
+                    pgReady.resolve();
+                }, 2000);
+
             }
         },
         bindEvents: function() {
@@ -38,6 +49,9 @@
                     window.confirm = navigator.notification.confirm;
 
                     document.addEventListener("backbutton", this.onBackKeyDown, false);
+                    document.addEventListener("online", this.onOnline, false);
+                    document.addEventListener("resume", this.onResume, false);
+                    this.loadMapsApi();
                     pgReady.resolve();
 
                     break;
@@ -65,6 +79,26 @@
             } else {
                 navigator.app.backHistory();
             }
+        },
+
+        onOnline: function() {
+            alert("online!");
+            this.loadMapsApi();
+        },
+
+        onResume: function() {
+            alert("Resume");
+            this.loadMapsApi();
+        },
+
+        loadMapsApi: function() {
+
+            // Si online et que le js n'a pas été chargé
+            if (!this.isWeb && (navigator.connection.type === Connection.NONE || !google.maps)) {
+                return;
+            }
+
+            $.getScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyB7pWPGH-pS6wEHJQbJ0P3XAUV_-tM30vg&sensor=true');
         }
 
     };
@@ -83,4 +117,4 @@
 
     // Initialisation Callback
     app.initialize();
-})();
+})(mgr);

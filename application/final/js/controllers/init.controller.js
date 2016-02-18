@@ -14,11 +14,7 @@
      * @method init
      */
     controllers.InitController.prototype.init = function() {
-
-       // $(document).ready(function() {
-            this.changePage('tmpl/home.html', 'fade');
-       // });
-
+        this.changePage('tmpl/home.html', 'fade');
     };
 
 })(window.controllers = window.controllers || {}, $);

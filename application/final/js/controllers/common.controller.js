@@ -41,7 +41,7 @@
      */
     controllers.CommonController.prototype.attachEvents = function(id, type, callback) {
 
-        if ($._data($(id)[0]).events === undefined) {
+        if ($(id) && $(id).length > 0 && $._data($(id)[0]).events === undefined) {
             $(id).off(type).on(type, callback);
         }
     };
@@ -80,6 +80,20 @@
             $(this).val("");
         });
 
+    };
+
+    controllers.CommonController.prototype.validateForm = function(id) {
+        if ($("#FarmerInfoForm").validate().form()) {
+            return true;
+        } else {
+            // Sinon on affiche un toast
+            if (window.cordova) {
+                window.plugins.toast.show('Champs du formulaire invalides !', 'long', 'center', function(a) {
+                });
+            } else {
+                alert('Champs du formulaire invalides !');
+            }
+        }
     };
 
 })(window.controllers = window.controllers || {}, $);

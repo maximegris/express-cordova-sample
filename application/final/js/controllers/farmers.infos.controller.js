@@ -4,8 +4,6 @@
     controllers.FarmerInfoController = function() {
         var self = this;
 
-        self.http = new mgr.common.AjaxManager();
-
         self.activeTab = 1;
 
         $.extend(self, new controllers.CommonController());
@@ -20,38 +18,19 @@
         self._saveFarmerInfo = function() {
 
             // Si le formulaire est valide, on enregistre
-            if ($("#FarmerInfoForm").validate().form()) {
+            if (self.validateForm("#FarmerInfoForm")) {
 
                 var id = document.getElementById('_id').value;
                 var datas = self.constructFarmerInfoJson();
 
                 // Si on a un ID, c'est que l'on est en modification
                 if (id) {
-                    self.http.json("farmers/" + id, "PUT", datas)
-                        .done(function(result) {
-                            //TODO
-                            alert("PUT OK!");
-                        });
+                    http.json("farmers/" + id, "PUT", datas);
                 } else {
                     // Sinon en création
-                    self.http.json("farmers", "POST", datas)
-                        .done(function(result) {
-                            // TODO 
-                            alert("POST OK!");
-                        });
-                }
-            } else {
-                // Sinon on affiche un toast
-                if (window.cordova) {
-                    window.plugins.toast.show('Champs du formulaire invalides !', 'long', 'center', function(a) {
-                        console.log('toast success: ' + a);
-                    });
-                } else {
-                    alert('Champs du formulaire invalides !');
+                    http.json("farmers", "POST", datas);
                 }
             }
-
-
 
         };
     };
@@ -84,11 +63,11 @@
 
         // Si on a un id, c'est que l'on est en modification donc on fait un appel Ajax pour récupérer les informations de l'éleveur
         if (id) {
-            self.http.json("farmers/" + id, "GET")
+            http.json("farmers/" + id, "GET")
                 .done(function(result) {
                     self.fncDisplayFarmerInfo(result.data);
                 });
-        } 
+        }
 
     };
 
@@ -154,7 +133,7 @@
         farmer.infos.mail = $("#mail").val() ? $("#mail").val() : null;
         farmer.farm = {};
         farmer.farm.localisation = $("#localisation").val() ? $("#localisation").val() : null;
-        farmer.farm.cp = $("#postal").val() ? $("#postal").val() : null;
+        farmer.farm.postal = $("#postal").val() ? $("#postal").val() : null;
         farmer.farm.city = $("#city").val() ? $("#city").val() : null;
 
         farmer.livestock = [];
@@ -162,19 +141,27 @@
         return farmer;
     };
 
-    controllers.FarmerInfoController.prototype.initMap = function(lat, lng) {
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 8,
-            center: {
-                lat: lat,
-                lng: lng
-            }
-        });
-        var geocoder = new google.maps.Geocoder();
+    controllers.FarmerInfoController.prototype.initMap = function(latitude, longitude) {
+        if (google.maps) {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(latitude, longitude),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL,
+                    position: google.maps.ControlPosition.LEFT_BOTTOM
+                },
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+            google.maps.event.trigger(map, "resize");
 
-        document.getElementById('submit').addEventListener('click', function() {
-            this.geocodeAddress(geocoder, map);
-        });
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function() {
+                this.geocodeAddress(geocoder, map);
+            });
+        }
     };
 
     controllers.FarmerInfoController.prototype.geocodeAddress = function(geocoder, resultsMap) {
