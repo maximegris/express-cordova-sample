@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+	<title>Cordova JQM Formation</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Tournée Scan">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+
+    <!--build:css libs/vendor.min.css-->
+    <link rel="stylesheet" href="libs/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="libs/jqm-font-awesome-isvg-ipng.min.css" />
+
+    <!--endbuild-->
+
+    <!--build:css css/application.min.css-->
+    <link rel="stylesheet" href="css/index.css"/>
+    <!--endbuild-->
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <!--build:js libs/vendor.min.js-->
+    <script type="text/javascript" src="libs/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="libs/jquery.validate.js"></script>   
+    <script type="text/javascript" src="libs/jquery.mobile-1.4.5.js"></script>   
+    <!--endbuild-->
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDFppelRgqjN7qNo9AKfldJrPIjzo5kyoE&signed_in=true"></script>
+    
+</head>
+<body>
+
+    <div id="main" class="invisible">
+        <header data-role="header" id="header" data-position="fixed" class="invisible">
+
+            <a id="headerBack" data-rel="back" data-transition="fade" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline invisible" title="Retour"> Retour</a>
+
+            <h1></h1>
+
+            <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+                <a href="#ModalInfo" id="headerInfo" data-transition="fade" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-mini ui-corner-all ui-icon-info" title="">Info</a>
+            </div>
+        </header><!-- end of header -->
+
+        <footer id="footer" data-role="footer" data-position="fixed" data-fullscreen="true" class="invisible">
+       </footer>
+
+
+       <div id="loading-indicator"></div>
+
+       <!-- this page will be displayed until jqm is initialized and we can load the actual start page -->
+       <section id="Init" data-role="page" data-title="Init">
+
+       </section>
+
+       <!-- shared info dialog available on all pages -->
+       <section data-role="page" data-dialog="true" id="ModalInfo" data-title="Information">
+        <div data-role="header">
+            <h1>Information</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <p><b>Application Formation PhoneGap/Cordova</b><br>
+                Application Formation PhoneGap/Cordova.<br>
+                (c) 2016 Maxime GRIS
+            </p>
+            <a data-rel="back" data-role="button">Retour</a>
+        </div>
+    </section>
+</div>
+
+<!--build:js js/application.min.js-->
+<script type="text/javascript" src="js/common/ajaxmanager.js"></script>
+<script type="text/javascript" src="js/common/router.js"></script>
+
+<script type="text/javascript" src="js/controllers/common.controller.js"></script>
+<script type="text/javascript" src="js/controllers/init.controller.js"></script>
+<script type="text/javascript" src="js/controllers/home.controller.js"></script>
+<script type="text/javascript" src="js/controllers/farmers.infos.controller.js"></script>
+<script type="text/javascript" src="js/controllers/farmers.list.controller.js"></script>
+
+<script type="text/javascript" src="js/app.init.js"></script> 
+<script type="text/javascript" src="js/init.js"></script> 
+<!--endbuild-->
+
+<script>'use strict'; document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');</script>
+</body>
+</html>

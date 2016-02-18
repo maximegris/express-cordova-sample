@@ -1,12 +1,12 @@
 {
     "name": "rest-webserver",
 	"version": "1.0.0",
-    "main": "server.js",
-    "dependencies": {
-        "express": "^4.13.4",
-        "body-parser": "^1.15.0",
-		"tingodb": "^0.4.2"
-    },
+	"description" : "Cordova application (JQM)",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/maximegris/express-cordova-sample.git"
+	},
+	"license" : "MIT",
 	"devDependencies": {
 		"gulp": "^3.9.1",
 		"gulp-util": "^3.0.7",

@@ -31,6 +31,9 @@
 	// middleware to use for all requests
 	router.use(function(req, res, next) {
 		// do logging
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+		res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Accept, Content-Length, X-Requested-With");
 		console.log('Request on route ' + req.originalUrl);
 		next(); // make sure we o to the next routes and don't stop here
 	});
@@ -44,22 +47,22 @@
 
 	// more routes for our API will happen 
 	router.route('/farmers')
-	// create a farmer (accessed at POST http://localhost:8080/api/farmers)
-	.post(farmers.addFarmer)
-	// get all the farmers (accessed at GET http://localhost:8080/api/farmers)
-	.get(farmers.findAll);
+		// create a farmer (accessed at POST http://localhost:8080/api/farmers)
+		.post(farmers.addFarmer)
+		// get all the farmers (accessed at GET http://localhost:8080/api/farmers)
+		.get(farmers.findAll);
 
 	router.route('/farmers/:id')
-	// get the farmer with that id (accessed at GET http://localhost:8080/api/farmers/:id)
-	.get(farmers.findFarmer)
-	// update a farmer (accessed at PUT http://localhost:8080/api/farmers/:id)
-	.put(farmers.updateFarmer)
-	// delete a farmer (accessed at DELETE http://localhost:8080/api/farmers/:id)
-	.delete(farmers.deleteFarmer);
+		// get the farmer with that id (accessed at GET http://localhost:8080/api/farmers/:id)
+		.get(farmers.findFarmer)
+		// update a farmer (accessed at PUT http://localhost:8080/api/farmers/:id)
+		.put(farmers.updateFarmer)
+		// delete a farmer (accessed at DELETE http://localhost:8080/api/farmers/:id)
+		.delete(farmers.deleteFarmer);
 
 	router.route('/farmers/:id/livestock')
-	// create a cow for a farmer (accessed at POST http://localhost:8080/api/farmers/:id/cows)
-	.post(farmers.addCow);
+		// create a cow for a farmer (accessed at POST http://localhost:8080/api/farmers/:id/cows)
+		.post(farmers.addCow);
 
 	// REGISTER OUR ROUTES
 	// all of our routes will be prefixed with /api

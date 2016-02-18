@@ -1,0 +1,66 @@
+<section data-role="page" id="FarmerInfo" data-title="Détail d'un éleveur">
+	<div role="main" class="ui-content">
+
+		<div >
+			<div data-role="navbar">
+				<ul id="tabs">
+					<li><a href="" id="info" data-icon="fa-comment" class="ui-btn-active">Infos</a></li>
+					<li><a href="" id="address" data-icon="fa-building">Exploitation</a></li>
+					<li><a href="" id="livestock" data-icon="fa-list-alt">Cheptel</a></li>
+				</ul>
+			</div>
+
+			<form id="FarmerInfoForm">
+				<div id="tab-info" class="ui-body-d ui-content">
+
+					<input type="hidden" name="_id" id="_id" />
+
+					<div data-role="fieldcontain">
+						<input type="text" name="firstname" id="firstname" placeholder="Prénom" data-corners="false" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="lastname" id="lastname" placeholder="Nom" data-corners="false" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="number" name="age" id="age" placeholder="Age" data-corners="false" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="tel" name="phonenumber" id="phonenumber" placeholder="Numéro de téléphone" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="email" name="mail" id="mail" placeholder="Email" required />
+					</div>
+
+				</div>
+				<div id="tab-address" class="ui-body-d ui-content invisible">
+					<div data-role="fieldcontain">
+						<input type="text" name="localisation" id="localisation" placeholder="Adresse" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="postal" id="postal" placeholder="Code postal" required />
+					</div>
+					<div data-role="fieldcontain">
+						<input type="text" name="city" id="city" placeholder="Ville" required />
+					</div>
+
+					<div id="map"></div>
+					<div id="panel">
+						<input id="search" type="text" placeholder="Rechercher..." >
+						<div class="ui-grid-a">
+							<div class="ui-block-a"><input id="submit" type="button" value="Geocode"></div>
+							<div class="ui-block-b"><input id="here" type="button" value="Geolocalisation"></div>
+						</div>					
+					</div>
+
+				</div>
+				<div id="tab-livestock" class="invisible">
+					<li data-role="list-divider">			
+						<ul data-role="listview" data-inset="true" id="cows-list">
+						</ul>
+					</li>
+				</div>
+			</form>
+		</div>
+	</div><!-- /content -->
+</section><!-- /page -->
+

@@ -1,0 +1,21 @@
+{
+	"firstname" : "",
+	"surname" : "",
+	"age" : ,
+	"infos" : {
+		"phonenumber" : "",
+		"mail" : ""
+	},
+	farm : {
+		"lat" : ,
+		"lon" : ,
+		"address" : "",
+		"postal" : "",
+		"city" : ""
+	},
+	livestock : [ {
+		"name" : "",
+		"breed" : "",
+		"type" : ""
+	}]
+}

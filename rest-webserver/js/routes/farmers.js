@@ -56,14 +56,12 @@
 
     	collection.insert({ 
     		_id : newId,
-    		name : farmer.name, 
+			firstname : farmer.firstname,
+    		lastname : farmer.lastname, 
     		age : farmer.age, 
-    		farm : {
-    			address : farmer.farm.address,
-    			geoloc : farmer.farm.geoloc,
-    			phonenumber : farmer.farm.phonenumber
-    		},
-    		livestock : [] 
+			infos : farmer.infos,
+    		farm : farmer.farm,
+    		livestock : farmer.livestock
     	}, 
     	function(err, result) {
     		_findFarmerById(newId, res);
@@ -92,14 +90,12 @@
     	collection.update({ 
     		_id : req.params.id 
     	},
-    	{
-    		name : farmer.name, 
+    	{ 
+			firstname : farmer.firstname,
+    		lastname : farmer.lastname, 
     		age : farmer.age, 
-    		farm : {
-    			address : farmer.farm.address,
-    			geoloc : farmer.farm.geoloc,
-    			phonenumber : farmer.farm.phonenumber
-    		},
+			infos : farmer.infos,
+    		farm : farmer.farm,
     		livestock : farmer.livestock
     	}, 
     	function(err, result) {
