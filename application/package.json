@@ -21,6 +21,9 @@
 		"gulp-watch": "^4.3.5",
 		"browser-sync": "^2.11.1",
 		"gulp-imagemin": "^2.4.0",
-		"gulp-uglify": "^1.5.2"
+		"gulp-uglify": "^1.5.2",
+		"cordova-icon": "^0.4.0",
+		"cordova-splash": "^0.4.0"
+		
   }
 }

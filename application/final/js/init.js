@@ -27,7 +27,6 @@
                 //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
                 // timeout pour simuler deviceready
                 setTimeout(function() {
-                    self.loadMapsApi();
                     pgReady.resolve();
                 }, 2000);
 
@@ -49,9 +48,6 @@
                     window.confirm = navigator.notification.confirm;
 
                     document.addEventListener("backbutton", this.onBackKeyDown, false);
-                    document.addEventListener("online", this.onOnline, false);
-                    document.addEventListener("resume", this.onResume, false);
-                    this.loadMapsApi();
                     pgReady.resolve();
 
                     break;
@@ -79,31 +75,11 @@
             } else {
                 navigator.app.backHistory();
             }
-        },
-
-        onOnline: function() {
-            alert("online!");
-            this.loadMapsApi();
-        },
-
-        onResume: function() {
-            alert("Resume");
-            this.loadMapsApi();
-        },
-
-        loadMapsApi: function() {
-
-            // Si online et que le js n'a pas été chargé
-            if (!this.isWeb && (navigator.connection.type === Connection.NONE || !google.maps)) {
-                return;
-            }
-
-            $.getScript('https://maps.googleapis.com/maps/api/js?key=API_KEY&sensor=true');
         }
 
     };
 
-    $(document).on('pageinit', '#Init', function(event) {
+    $(document).on('pagecreate', '#Init', function(event) {
         jqmReady.resolve();
     });
 

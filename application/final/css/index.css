@@ -1,49 +1,3 @@
-/** Evite de tronquer le texte dans les listes / footer **/
-body .ui-li .ui-li-desc {
-   white-space: normal;
-}
-
-body .ui-footer .ui-title {
-   white-space: normal;
-}
-
-.ui-footer {
-    padding: 0;
-    margin: 0;
-    border-width: 0; 
-}
-
-.ui-footer a.ui-btn{
-    margin: 0;
-    width: 100%;
-    border-color: #000 !important;
-    border-left-style: none !important;
-    border-right-style: none !important;
-}
-
-/* Supprime le halo bleu des boutons */
-a.ui-btn:focus, input:focus, .ui-shadow-inset {
- -moz-box-shadow: none !important;
- -webkit-box-shadow: none !important;
- box-shadow: none !important;
-}
-
-.ui-field-contain {
-    border: none;
-}
-
-.ui-input-text, .ui-input-search {
-    margin : .2em 0;
-}
-
-div.error {
-    border-color:#FF4136 !important;
-}
-
-div.valid {
-    border-color:#2ECC40 !important;
-}
-
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
@@ -58,8 +12,65 @@ html, body {
     width: 100%;
 }
 
+/** Evite de tronquer le texte dans les listes / footer **/
+body .ui-li .ui-li-desc {
+ white-space: normal;
+}
+
+body .ui-footer .ui-title {
+ white-space: normal;
+}
+
+.ui-footer {
+    padding: 0;
+    margin: 0;
+    border-width: 0; 
+}
+
+.ui-footer a.ui-btn {
+    margin: 0;
+    width: 100%;
+    border-color: #000 !important;
+    border-left-style: none !important;
+    border-right-style: none !important;
+}
+
+/* Supprime le halo bleu des boutons */
+.ui-btn:focus, input:focus, .ui-focus, .ui-shadow-inset {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.ui-btn {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.ui-field-contain {
+    border: none;
+}
+
+.ui-input-text, .ui-input-search {
+    margin : .2em 0;
+}
+
+/* Couleur du div lors de la validation */
+div.error {
+    border-color:#FF4136 !important;
+}
+
+div.valid {
+    border-color:#2ECC40 !important;
+}
+
 .invisible {
   display: none;
+}
+
+.same-line {
+    display: inline-block;
 }
 
 
@@ -96,9 +107,8 @@ h1 {
     text-align:center;
 }
 
+/* Page d'accueil */
 .event {
-    border-radius:4px;
-    -webkit-border-radius:4px;
     color:#FFFFFF;
     font-size:12px;
     margin:0 30px;
@@ -137,11 +147,18 @@ h1 {
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5) url('../img/ajax-loader.gif') no-repeat center center;
+    background: url('../img/ajax-loader.gif') no-repeat center center;
     top: 0;
     left: 0;
     display: none;
     z-index: 1200;
+}
+
+/* Image d'appel */
+.call {
+    height: 50px;
+    width: 50px;
+    margin: 5px 10px;
 }
 
 #map {

@@ -8,7 +8,7 @@
 
         $.extend(self, new controllers.CommonController());
 
-        self._openFarmerList = function() {
+        self._openFarmerList = function(event) {
             self.changePage('farmers_list.html', 'fade');
         };
     };

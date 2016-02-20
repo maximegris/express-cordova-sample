@@ -5,20 +5,24 @@
         var self = this;
 
         self.activeTab = 1;
+        self.validator = null;
 
         $.extend(self, new controllers.CommonController());
 
-
-        self._openTabInfo = function() {
-            var id = this.getAttributeNode("id").value;
-
+        self._openTabInfo = function(event) {
+            var id = $(this).attr("id");
             self.displayTab(id);
         };
 
-        self._saveFarmerInfo = function() {
+        self._upperCase = function(event) {
+            var _$this = $(this);
+            _$this.val(_$this.val().toUpperCase());
+        };
+
+        self._saveFarmerInfo = function(event) {
 
             // Si le formulaire est valide, on enregistre
-            if (self.validateForm("#FarmerInfoForm")) {
+            if (self.validateForm("#farmerInfoForm", self.validator)) {
 
                 var id = document.getElementById('_id').value;
                 var datas = self.constructFarmerInfoJson();
@@ -32,6 +36,32 @@
                 }
             }
 
+        };
+
+        self._setLocalisation = function(event) {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function onSuccess(position) {
+                        alert(position);
+                        alert(position.coords);
+                        alert(position.coords.latitude);
+                        $("#lat").val(position.coords.latitude);
+                        $("#lng").val(position.coords.longitude);
+                    },
+                    // onError Callback receives a PositionError object
+                    function onError(error) {
+                        alert('code: ' + error.code + ' - ' + 'message: ' + error.message + '\n');
+                    }, {
+                        maximumAge: 3000,
+                        timeout: 5000,
+                        enableHighAccuracy: true
+                    });
+            }
+        };
+
+        self.this_openModalAddCow = function(event) {
+            return true;
         };
     };
 
@@ -50,22 +80,41 @@
 
         this.displayTab("info");
 
-        $("#FarmerInfoForm").validate();
+        this.validator = $("#farmerInfoForm").validate({
+            rules: {
+                firstname: "required",
+                lastname: "required",
+                age: "required",
+                phonenumber: "required",
+                mail: {
+                    required: true,
+                    email: true
+                },
+                localisation: "required",
+                postal: "required",
+                city: "required"
+            },
+            ignore: []
+        });
 
         this.load(id);
 
         this.attachEvents('#tabs li a', 'click', this._openTabInfo);
+        this.attachEvents('#here', 'click', this._setLocalisation);
+        this.attachEvents("#addCow", 'click', this._openModalAddCow);
+        this.attachEvents('#lastname', 'blur', this._upperCase);
+        this.attachEvents('#city', 'blur', this._upperCase);
 
     };
 
     controllers.FarmerInfoController.prototype.load = function(id) {
-        var self = this;
+        var _that = this;
 
         // Si on a un id, c'est que l'on est en modification donc on fait un appel Ajax pour récupérer les informations de l'éleveur
         if (id) {
             http.json("farmers/" + id, "GET")
                 .done(function(result) {
-                    self.fncDisplayFarmerInfo(result.data);
+                    _that.fncDisplayFarmerInfo(result.data);
                 });
         }
 
@@ -91,16 +140,11 @@
                 $("#city").val(farmer.farm.city);
 
                 if (farmer.farm.lat && farmer.farm.lng) {
-                    this.initMap(farmer.farm.lat, farmer.farm.lng);
-                } else {
-                    this.initMap(-34.397, 150.644);
+                    $("#lat").val(farmer.farm.lat);
+                    $("#lng").val(farmer.farm.lng);
                 }
-            } else {
-                this.initMap(-34.397, 150.644);
             }
 
-        } else {
-            this.initMap(-34.397, 150.644);
         }
 
     };
@@ -135,6 +179,8 @@
         farmer.farm.localisation = $("#localisation").val() ? $("#localisation").val() : null;
         farmer.farm.postal = $("#postal").val() ? $("#postal").val() : null;
         farmer.farm.city = $("#city").val() ? $("#city").val() : null;
+        farmer.farm.lat = $("#lat").val() ? $("#lat").val() : null;
+        farmer.farm.lng = $("#lng").val() ? $("#lng").val() : null;
 
         farmer.livestock = [];
 

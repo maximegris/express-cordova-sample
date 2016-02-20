@@ -1,4 +1,4 @@
-(function(mgr, $, undefined) {
+﻿(function(mgr, $, undefined) {
     "use strict";
 
     mgr.common = mgr.common || {};
@@ -6,8 +6,8 @@
     mgr.common.AjaxManager = function() {
 
         var self = this;
-        // "225.45.155.104";
-        self.baseURL = "http://xxxxxx:8080/api/";
+        //104.155.45.225
+        self.baseURL = "http://104.155.45.225:8080/api/";
 
         self.ajaxCount = 0;
 
@@ -58,13 +58,7 @@
                 } else {
                     alert('Données mises à jour');
                 }
-            } else if (settings.type === "DELETE") {
-                if (window.cordova) {
-                    window.plugins.toast.show('Données supprimées', 'long', 'center', function(a) {});
-                } else {
-                    alert('Données supprimées');
-                }
-            }
+            } 
 
         });
 

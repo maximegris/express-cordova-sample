@@ -8,7 +8,7 @@
     var router = new mgr.common.Router();
 
     // Fire when the page change
-    $(document).on("pagecontainerchange", function() {
+    $(document).on("pagecontainerbeforeshow", function() {
 
         //our requirement is that data-title is defined for all pages, we will automatically extract it
         var currentPage = $(".ui-page-active").jqmData("title");
@@ -54,18 +54,14 @@
 
         // Page Theme
         $.mobile.page.prototype.options.theme = "a";
-        $.mobile.page.prototype.options.backBtnTheme = "a";
-        $.mobile.page.prototype.options.headerTheme = "a";
-        $.mobile.page.prototype.options.contentTheme = "a";
-        $.mobile.page.prototype.options.footerTheme = "a";
+
+        $.mobile.toolbar.prototype.options.theme = "b";
 
         // Listview heme
-        $.mobile.listview.prototype.options.headerTheme = "a";
         $.mobile.listview.prototype.options.theme = "a";
-        $.mobile.listview.prototype.options.dividerTheme = "a";
-        $.mobile.listview.prototype.options.splitTheme = "a";
-        $.mobile.listview.prototype.options.countTheme = "a";
-        $.mobile.listview.prototype.options.filterTheme = "a";
+
+        // Popup theme
+        $.mobile.popup.prototype.options.theme = "a";
 
         // Options de jqvalidator
         $.validator.setDefaults({
@@ -76,9 +72,11 @@
             success: function(label) {
                 // bordure verte ur l'input
                 var element = '#' + label.attr('for');
-                $(element).parent().addClass('valid');
+                $(element).parent().removeClass('error');
             }
         });
+
+        new controllers.InitController().init();
 
     });
 
