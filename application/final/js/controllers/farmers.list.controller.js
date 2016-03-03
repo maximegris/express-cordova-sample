@@ -5,7 +5,7 @@
 
         var self = this;
 
-        $.extend(self, new controllers.CommonController());
+        $.extend(self, new controllers.MixinController());
 
         self._openFarmerInfo = function(event) {
             var arrIdx = this.getAttributeNode("dataIndex").value;
@@ -52,12 +52,8 @@
      */
     controllers.FarmersListController.prototype.init = function() {
 
-        this.flipHeaderButtons(["headerInfo"]);
 
-        this.changeFooterTemplate(true, '<fieldset> <div><a href="" id="addFarmer" class="ui-btn">Ajouter un éleveur</a></div> </fieldset>');
-
-        this.attachEvents('#addFarmer', 'click', this._addNewFarmer);
-
+        this.attachEvents('#add-farmer', 'click', this._addNewFarmer);
 
         this.load();
     };
@@ -90,11 +86,11 @@
         }
 
         //display
-        $("#farmers-list").html(outList);
+        $("#farmers-list").html(outList).enhanceWithin();
 
-        this.attachEvents('#farmers-list a', 'click', this._openFarmerInfo);
+        this.attachEvents('#farmers-list', 'click', this._openFarmerInfo, 'a');
 
-        this.attachEvents('#farmers-list a', 'swipe', this._deleteFarmer);
+        this.attachEvents('#farmers-list', 'swipe', this._deleteFarmer, 'li');
 
         this.attachEvents('.call', 'click', this._phoneCall);
 

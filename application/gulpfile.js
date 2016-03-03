@@ -8,7 +8,7 @@ var gulp  = require('gulp'),
     jshint = require('gulp-jshint'),
     sourcemaps = require('gulp-sourcemaps'),
     useref = require('gulp-useref'),
-    rjs = require('gulp-requirejs'),
+	uglify = require('gulp-uglify'),
     browserSync = require('browser-sync');
 
 var dist = 'CordovaJQM';
@@ -24,31 +24,40 @@ gulp.task('watch', function(callback) {
   runSequence('build',  ['browserSync'],  callback);
 });
 
-gulp.task('build', function (callback) {
-  console.log('Building files');
-  runSequence('clean',
-    ['copyAssets', 'useref', 'jshint'],
-    callback
-  )
-})
-
-gulp.task('clean', function() {
-  del.sync(dist + '/www/*');
-})
-
-gulp.task('copyAssets', function() {  
-  return gulp.src([root + '/**/*.html', '!' + root + '/index.html', root + '/**/*.png',root + '/**/*.jpeg',root + '/**/*.gif',root + '/**/*.webp',root + '/**/*.svg'])
-  .pipe(gulp.dest(dist + '/www'));
-})
-
 // configure a live browser
 gulp.task('browserSync', function() {
   console.log(gutil.env.type);
   browserSync({
     server: {
-      baseDir: gutil.env.type === 'production' ? dist + '/www' : root
+      baseDir: (gutil.env.type === 'production' || gutil.env.type === 'prod') ? dist + '/www' : root
     },
   })
+});
+
+// build files
+gulp.task('build', function (callback) {
+  runSequence('clean', ['copy-assets', 'build-js-css'], callback);
+});
+
+gulp.task('clean', function() {
+  del.sync(dist + '/www/*');
+});
+
+gulp.task('copy-assets', function() {  
+  return gulp.src([root + '/**/*.html', '!' + root + '/index.html', root + '/**/*.png',root + '/**/*.jpeg',root + '/**/*.gif',root + '/**/*.webp',root + '/**/*.svg'])
+  .pipe(gulp.dest(dist + '/www'));
+})
+
+gulp.task('build-js-css', function (callback) {
+	if(gutil.env.type === 'prod') {
+		  runSequence('jshint', ['build-prod'], callback);
+	} else {
+		  runSequence('jshint', ['useref'], callback);
+	}
+});
+
+gulp.task('build-prod', function (callback) {
+	runSequence('useref', ['compress', ], callback);
 })
 
 // configure the jshint task
@@ -63,4 +72,10 @@ gulp.task('useref', function(){
   return gulp.src(root + '/index.html')
     .pipe(useref())
     .pipe(gulp.dest(dist + '/www'));
+});
+
+gulp.task('compress', function() {
+  return gulp.src(dist + '/www/js/**/*.js')
+    .pipe(uglify())
+    .pipe(gulp.dest(dist + '/www/js/'));
 });

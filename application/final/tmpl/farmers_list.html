@@ -1,7 +1,23 @@
-<div data-role="page" id="FarmersList" data-title="Liste des éleveurs" class="invisible" >
-    <div role="main" class="ui-content">
-        <ul data-role="listview" id="farmers-list" data-filter="true" data-filter-placeholder="Rechercher une personne..." data-corners="false">
-        </ul>
-    </div><!-- /content -->    
+<div data-role="page" id="FarmersList" data-title="Liste des éleveurs" >
+	<header data-role="header" id="header" data-position="fixed">
+
+		<a id="header-back" data-rel="back" data-transition="fade" data-icon="arrow-l" title="Retour">Retour</a>
+
+		<h1></h1>
+
+		<div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+			<a href="#ModalInfo" id="header-info" data-transition="fade" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-mini ui-corner-all ui-icon-info" title="">Info</a>
+		</div>
+	</header><!-- end of header -->
+
+
+	<div role="main" class="ui-content">
+		<ul data-role="listview" id="farmers-list" data-filter="true" data-filter-placeholder="Rechercher une personne..." data-corners="false">
+		</ul>
+	</div><!-- /content -->   
+
+	<footer id="footer" data-role="footer" data-position="fixed" data-fullscreen="true">
+		<fieldset> <div><a href="" id="add-farmer" class="ui-btn">Ajouter un éleveur</a></div> </fieldset>
+	</footer> 
 </div><!-- /page -->
 

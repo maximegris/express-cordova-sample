@@ -31,7 +31,8 @@
 
     	var cursor = collection.find({})
     	.sort( { 
-    		name : 1 
+    		firstname : 1 ,
+			lastname : 1
     	});
 
     	// Loop on cursor
@@ -128,7 +129,7 @@
 
     	var farmer = req.body;
 
-    	collection.update.update({ 
+    	collection.update({ 
     		_id : req.params.id
     	},
     	{

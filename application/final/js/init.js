@@ -25,10 +25,7 @@
                 console.log("Is web.");
 
                 //In case of web we ignore PG but resolve the Deferred Object to trigger initialization
-                // timeout pour simuler deviceready
-                setTimeout(function() {
-                    pgReady.resolve();
-                }, 2000);
+                pgReady.resolve();
 
             }
         },

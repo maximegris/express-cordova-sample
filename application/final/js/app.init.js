@@ -7,21 +7,26 @@
     // Router system
     var router = new mgr.common.Router();
 
-    // Fire when the page change
+    // Fire before the next page show
     $(document).on("pagecontainerbeforeshow", function() {
+
+        var controllerCode = $.mobile.activePage[0].id; //we use the id as the convention for control code
+
+        //load page controller based on which controller or page title data-controller avoid Preinit and info pages
+        if (current !== controllerCode && router.navigate(controllerCode)) {
+            current = controllerCode;
+        }
+
+    });
+
+    // Fire when the page previous page hide
+    $(document).on("pagecontainerhide", function() {
 
         //our requirement is that data-title is defined for all pages, we will automatically extract it
         var currentPage = $(".ui-page-active").jqmData("title");
 
         // Change the header
         $("header h1").text(currentPage);
-
-        var controllerCode = $.mobile.activePage[0].id; //we use the id as the convention for control code
-
-        //load page controller based on which controller or page title data-controller avoid Preinit and info pages
-        if (current !== controllerCode && router.navigate(controllerCode)) {
-            current = $.mobile.activePage[0].id;
-        }
 
     });
 
@@ -75,8 +80,6 @@
                 $(element).parent().removeClass('error');
             }
         });
-
-        new controllers.InitController().init();
 
     });
 

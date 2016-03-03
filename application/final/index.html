@@ -30,20 +30,6 @@
 <body>
 
     <div id="main" class="invisible">
-        <header data-role="header" id="header" data-position="fixed" class="invisible">
-
-            <a id="headerBack" data-rel="back" data-transition="fade" data-icon="arrow-l" class="invisible" title="Retour">Retour</a>
-
-            <h1></h1>
-
-            <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
-                <a href="#ModalInfo" id="headerInfo" data-transition="fade" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-mini ui-corner-all ui-icon-info" title="">Info</a>
-            </div>
-        </header><!-- end of header -->
-
-        <footer id="footer" data-role="footer" data-position="fixed" data-fullscreen="true" class="invisible">
-        </footer>
-
 
         <div id="loading-indicator"></div>
 
@@ -53,7 +39,7 @@
         </section>
 
         <!-- shared info dialog available on all pages -->
-        <section data-role="page" data-dialog="true" id="ModalInfo" data-title="Information">
+        <section data-role="dialog" id="ModalInfo" data-title="Information">
             <div data-role="header">
                 <h1>Information</h1>
             </div>
@@ -79,8 +65,9 @@
     <script type="text/javascript" src="js/common/ajaxmanager.js"></script>
     <script type="text/javascript" src="js/common/router.js"></script>
 
-    <script type="text/javascript" src="js/controllers/common.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/mixin.controller.js"></script>
     <script type="text/javascript" src="js/controllers/init.controller.js"></script>
+    <script type="text/javascript" src="js/controllers/modalinfo.controller.js"></script>
     <script type="text/javascript" src="js/controllers/home.controller.js"></script>
     <script type="text/javascript" src="js/controllers/farmers.infos.controller.js"></script>
     <script type="text/javascript" src="js/controllers/farmers.list.controller.js"></script>

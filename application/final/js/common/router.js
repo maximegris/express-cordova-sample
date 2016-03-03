@@ -12,6 +12,12 @@
          * A route is defined by { pattern : pattern, handler: handler }
          */
         this.routes = [{
+            pattern: 'Init',
+            handler: new controllers.InitController()
+        }, {
+            pattern: 'ModalInfo',
+            handler: new controllers.ModalInfoController()
+        }, {
             pattern: 'Home',
             handler: new controllers.HomeController()
         }, {

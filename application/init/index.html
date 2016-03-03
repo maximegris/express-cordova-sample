@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+	<title>Cordova JQM Formation</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Tournée Scan">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="PRAGMA" content="NO-CACHE" />
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+    <meta http-equiv="Content-Security-Policy"/>
+    
+    <!--build:css libs/vendor.min.css-->
+    <link rel="stylesheet" href="libs/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="libs/jqm-font-awesome-isvg-ipng.min.css" />
+
+    <!--endbuild-->
+
+    <!--build:css css/application.min.css-->
+    <link rel="stylesheet" href="css/index.css"/>
+    <!--endbuild-->
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <!--build:js libs/vendor.min.js-->
+    <script type="text/javascript" src="libs/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="libs/jquery.validate.js"></script>   
+    <script type="text/javascript" src="libs/jquery.mobile-1.4.5.js"></script>   
+    <!--endbuild-->
+
+    <!--build:js js/application.min.js-->
+    <script type="text/javascript" src="js/common/router.js"></script>
+
+    <script type="text/javascript" src="js/controllers/controllers.js"></script>
+
+    <script type="text/javascript" src="js/app.init.js"></script> 
+    <script type="text/javascript" src="js/init.js"></script> 
+    <!--endbuild-->
+    
+</head>
+<body>
+
+    <div id="main" class="invisible">
+
+        <div id="loading-indicator"></div>
+
+        <!-- this page will be displayed until jqm is initialized and we can load the actual start page -->
+        <section id="Init" data-role="page" data-title="Init">
+        </section>
+
+        <div data-role="page" id="Home" data-title="Home">
+            <div class="app">
+                <div id="deviceready" class="blink">
+                    <p class="event listening">Connecting to Device</p>
+                    <p class="event received">Device is Ready</p>
+                    <a id="farmers" class="ui-btn">Liste des éleveurs</a>
+                </div>
+            </div>
+        </div>
+
+        <div data-role="page" id="FarmersList" data-title="Liste des éleveurs" class="invisible" >
+            <header data-role="header" id="header" data-position="fixed">
+                <a id="header-back" data-rel="back" data-transition="fade" data-icon="arrow-l" class="invisible" title="Retour">Retour</a>
+                <h1></h1>
+                <div data-type="horizontal" data-role="controlgroup" class="ui-btn-right">
+                    <a href="#ModalInfo" id="header-info" data-transition="fade" class="ui-btn ui-btn-inline ui-btn-icon-notext ui-mini ui-corner-all ui-icon-info" title="">Info</a>
+                </div>
+            </header><!-- end of header -->
+
+            <div role="main" class="ui-content">
+                <ul data-role="listview" id="farmers-list" data-filter="true" data-filter-placeholder="Rechercher une personne..." data-corners="false">
+
+                    <li><h2>Eleveur 1</h2></li>
+                    <li><h2>Eleveur 2</h2></li>
+                    <li><h2>Eleveur 3</h2></li>
+                    <li><h2>Eleveur 4</h2></li>
+                    <li><h2>Eleveur 5</h2></li>
+                    <li><h2>Eleveur 6</h2></li>
+                    <li><h2>Eleveur 7</h2></li>
+                    <li><h2>Eleveur 8</h2></li>
+                    <li><h2>Eleveur 9</h2></li>
+                    <li><h2>Eleveur 10</h2></li>
+                    <li><h2>Eleveur 11</h2></li>
+                    <li><h2>Eleveur 12</h2></li>
+                    <li><h2>Eleveur 13</h2></li>
+                    <li><h2>Eleveur 14</h2></li>
+                    <li><h2>Eleveur 15</h2></li>
+
+                </ul>
+            </div><!-- /content -->   
+            <footer id="footer" data-role="footer" data-position="fixed" data-fullscreen="true">
+            </footer> 
+        </div><!-- /page -->
+
+        <section data-role="page" id="FarmerInfo" data-title="Détail d'un éleveur" class="invisible">
+            <div role="main" class="ui-content">
+
+                <div >
+                    <div data-role="navbar">
+                        <ul id="tabs">
+                            <li><a href="" id="info" data-icon="fa-comment" class="ui-btn-active">Infos</a></li>
+                            <li><a href="" id="address" data-icon="fa-building">Exploitation</a></li>
+                            <li><a href="" id="livestock" data-icon="fa-list-alt">Cheptel</a></li>
+                        </ul>
+                    </div>
+
+                    <form id="farmer-info-form">
+                        <div id="tab-info">
+                            <input type="hidden" name="_id" id="_id" />
+
+                            <div data-role="fieldcontain">
+                                <input type="text" name="firstname" id="firstname" placeholder="Prénom" data-corners="false" />
+                                <input type="text" name="lastname" id="lastname" placeholder="Nom" data-corners="false" />
+                                <input type="number" name="age" id="age" placeholder="Age" data-corners="false" />
+                                <input type="tel" name="phonenumber" id="phonenumber" placeholder="Numéro de téléphone" />
+                                <input type="email" name="mail" id="mail" placeholder="Email" />
+                                <input type="button" name="findContact" id="findContact" value="Rechercher dans contacts" data-corners="false">
+                            </div>
+                        </div>
+                        <div id="tab-address" class="invisible">
+                            <div data-role="fieldcontain">
+                                <input type="text" name="localisation" id="localisation" placeholder="Adresse" data-corners="false" />
+                                <input type="text" name="postal" id="postal" placeholder="Code postal" data-corners="false" />
+                                <input type="text" name="city" id="city" placeholder="Ville" data-corners="false" />
+
+                                <div class="ui-grid-a">
+                                    <div class="ui-block-a"><input type="text" name="lat" id="lat" placeholder="Latitude" data-corners="false" disabled /></div>
+                                    <div class="ui-block-b"><input type="text" name="lng" id="lng" placeholder="Longitude" data-corners="false" disabled /></div>
+                                </div>  
+                                <input type="button" name="get-geoloc" id="get-geoloc" value="Geolocalisation" data-corners="false">                
+                            </div>
+
+                        </div>
+                        <div id="tab-livestock" class="invisible">
+
+                            <div data-role="collapsible-set" id="accordion-cows">
+                            </div>
+
+                            <a href="#add-cow" id="btn-add-cow" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn">Ajouter une vache</a>
+
+                            <div data-role="popup" id="add-cow" data-history="false" data-dismissible="false" data-corners="false">
+                                <div data-role="header" data-theme="a">
+                                    <h1>Ajouter</h1>
+                                </div>
+                                <div role="main" class="ui-content">
+                                    <select name="cow-type" id="cow-type" data-corners="false">
+                                        <option value="Limousine" selected="selected">Limousine</option>
+                                        <option value="Monbéliarde">Monbéliarde</option>
+                                        <option value="Béarnaise">Béarnaise</option>
+                                    </select>
+                                    <input type="text" name="cow-name" id="cow-name" placeholder="Nom" data-corners="false" />
+
+                                    <div class="ui-grid-a">
+                                    <div class="ui-block-a"><a href="" class="ui-btn" data-rel="back">Retour</a></div>
+                                        <div class="ui-block-b"><a href="" class="ui-btn" id="save-cow" data-transition="flow">Valider</a></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /content -->
+        </section><!-- /page -->
+
+
+
+        <!-- shared info dialog available on all pages -->
+        <section data-role="dialog" id="ModalInfo" data-title="Information">
+            <div data-role="header">
+                <h1>Information</h1>
+            </div>
+
+            <div role="main" class="ui-content">
+                <p><b>PhoneGap/Cordova</b><br>
+                    Application Formation PhoneGap/Cordova/JQM.<br>
+                    (c) 2016 Maxime GRIS
+                </p>
+                <a data-rel="back" data-role="button">Retour</a>
+            </div>
+        </section>
+    </div>
+
+
+    <script>'use strict'; document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>');</script>
+</body>
+</html>

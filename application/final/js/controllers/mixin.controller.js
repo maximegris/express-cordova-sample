@@ -1,6 +1,6 @@
 (function(controllers, $, undefined) {
     "use strict";
-    controllers.CommonController = function() {
+    controllers.MixinController = function() {
         var self = this;
     };
 
@@ -11,7 +11,7 @@
      * @param {String} Ptmpl Le template jqm à charger
      * @param {String} pTransition La transistion lors du changement de page
      */
-    controllers.CommonController.prototype.changePage = function(Ptmpl, pTransition, pData) {
+    controllers.MixinController.prototype.changePage = function(Ptmpl, pTransition, pData) {
 
         //go to farmers page now
         $(":mobile-pagecontainer").pagecontainer("change", Ptmpl, {
@@ -23,7 +23,7 @@
     };
 
 
-    controllers.CommonController.prototype.getURLParameter = function(name) {
+    controllers.MixinController.prototype.getURLParameter = function(name) {
 
         var res = decodeURI((RegExp(name + '=' + '(.+?)(&|$)').exec(window.location.href) || [, null])[1]);
 
@@ -38,51 +38,28 @@
      * @param {String} id L'identifiant du selecteur Jquery
      * @param {String} type Le type d'évenement à binder
      * @param {Function} callback La fonction de callback
+     * @param {String} id L'identifiant du selecteur sur lequel appliquer la délégation
      */
-    controllers.CommonController.prototype.attachEvents = function(id, type, callback) {
+    controllers.MixinController.prototype.attachEvents = function(id, type, callback, selector) {
 
         if ($(id) && $(id).length > 0) {
-            $(id).off(type).on(type, callback);
+            if(selector) {
+                $(id).off(type, selector).on(type, selector, callback);
+            } else {
+                $(id).off(type).on(type, callback);
+            }
+            
         }
     };
 
-    controllers.CommonController.prototype.flipHeaderButtons = function(btnVisibles) {
-
-        // Si la liste est vide, on cache le heder
-        $('#header').removeClass('invisible');
-
-        // On rend tous le boutons invisibles
-        $("#header a:not('.invisible')").each(function(index) {
-            $(this).addClass("invisible");
-        });
-
-        // On affiche que les boutons de l'écran
-        $.each(btnVisibles, function(index, value) {
-            $("#" + value).removeClass("invisible");
-        });
-
-    };
-
-    controllers.CommonController.prototype.changeFooterTemplate = function(visible, tmpl) {
-
-        var _footer = $("footer");
-        if (visible && _footer.hasClass("invisible")) {
-            _footer.removeClass("invisible");
-        } else if (!visible) {
-            _footer.addClass("invisible");
-        }
-        _footer.html(tmpl);
-
-    };
-
-    controllers.CommonController.prototype.clearInputs = function(parent) {
+    controllers.MixinController.prototype.clearInputs = function(parent) {
         $(parent + ' input[type!="button"]').each(function() {
             $(this).val("");
         });
 
     };
 
-    controllers.CommonController.prototype.validateForm = function(id, validator) {
+    controllers.MixinController.prototype.validateForm = function(id, validator) {
 
         var $inputs = $(id).find("input");
         var valid = true;

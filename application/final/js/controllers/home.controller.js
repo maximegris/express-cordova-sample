@@ -1,12 +1,10 @@
-"use strict";
-
 (function(controllers, $, undefined) {
-
+    "use strict";
     controllers.HomeController = function() {
 
         var self = this;
 
-        $.extend(self, new controllers.CommonController());
+        $.extend(self, new controllers.MixinController());
 
         self._openFarmerList = function(event) {
             self.changePage('farmers_list.html', 'fade');
@@ -28,12 +26,6 @@
 
         // Attacher un évènement sur l'id farmers
         this.attachEvents('#farmers', 'click', this._openFarmerList);
-
-        // Cache le header
-        $("header").addClass("invisible");
-
-        // Cache le footer et vide le template
-        this.changeFooterTemplate(false, "");
 
         // Affiche le contenu de la page (évite le flick)
         $("#main").removeClass("invisible");

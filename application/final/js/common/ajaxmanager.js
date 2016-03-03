@@ -64,7 +64,8 @@
 
         // gestion des erreurs HTTP
         $(document).ajaxError(function(event, jqxhr, settings, exception) {
-            alert('Une erreur http est survenue : ' + exception );
+        	window.plugins.toast.show('Problème réseau', 'long', 'center', function(a) {});
+            //alert('Une erreur http est survenue : ' + exception );
         });
     };
 

@@ -1,0 +1,39 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.practice-1 {
+	height: 90px;
+	width: 100%;
+	font-size: 2em;
+	text-align: center;
+}
+
+#practice-2 {
+	width: 100%;
+	list-style-type: none;
+	padding: 0;
+}
+
+#practice-2 li {
+	height: 30px;
+	text-align: center;	
+}
+
+.header-vaches {
+	text-align: center; 
+	padding: 30px 0 0 0; 
+	font-weight: bold; 
+	text-decoration: underline;
+}
+
+.btns {
+	text-align: center;
+}
+
+li.over {
+	background-color: #3399CC;
+}

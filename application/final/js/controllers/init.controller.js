@@ -5,7 +5,7 @@
 
         var self = this;
 
-        $.extend(self, new controllers.CommonController());
+        $.extend(self, new controllers.MixinController());
 
     };
 
